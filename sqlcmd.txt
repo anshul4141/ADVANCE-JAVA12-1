@@ -1,0 +1,6 @@
+1. show databases;
+2. create database nameofdatabase;
+3. use nameofdatabase;
+4. create table employee(id int primary key, name varchar(50), address varchar(50), company varchar(50), salary int);
+5. insert into employee values(1, 'Shyam', 'Indore', 'NCS', 40000);
+6. select * from employee;
