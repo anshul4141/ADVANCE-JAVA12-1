@@ -4,3 +4,18 @@
 4. create table employee(id int primary key, name varchar(50), address varchar(50), company varchar(50), salary int);
 5. insert into employee values(1, 'Shyam', 'Indore', 'NCS', 40000);
 6. select * from employee;
+8. insert into employee values(9, 'Himanshi', 'Pune', 'Google', 80000),(10, 'Ritesh', 'Indore', 'TCS', 65000),(11, 'Rajendra', 'Banglore', 'YashTech', 75000),(12, 'Megha', 'Goa', 'TechMahindra', 75000); (for insert multiple data in one query)
+
+9.update employee set name = 'Montu' where id = 8;
+10.select company from employee where id = 1;
+11.select * from employee order by salary desc;
+12.select * from employee order by salary asc;
+13.select * from employee limit 0,10;
+14.select * from employee order by salary desc limit 1,1;
+
+marksheet :- 
+
+1. create database studentresult;
+2. use studentresult;
+3. insert into marksheet values(2, 102, 'Shyam', 75, 64, 45),(3, 103, 'Arun', 33, 45, 21),(4, 104, 'Pawan', 33, 78, 64),(5, 105, 'Mayank', 58, 72, 63),(6, 106, 'Rakesh', 33, 21, 46),(7, 107, 'Anish', 99, 94, 92),(8, 108, 'Prachi', 22, 100, 100);
+4. select * from marksheet;
