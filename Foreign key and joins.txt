@@ -1,0 +1,189 @@
+mysql> create database advancejava;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use advancejava;
+Database changed
+mysql> create table emp(id int primary key, name varchar(50), salary int, company varchar(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into emp values(1, 'Ram', 45000, 'NCS'),(2, 'Syam', 50000, 'TCS'),(3, 'Aman', 30000, 'TechM'),(4, 'Hritik'
+, 75000, 'Infosys'),(5, 'Komal', 20000, 'Rays'),(6, 'Pawan', 35000, 'NCS');
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++----+--------+--------+---------+
+| id | name   | salary | company |
++----+--------+--------+---------+
+|  1 | Ram    |  45000 | NCS     |
+|  2 | Syam   |  50000 | TCS     |
+|  3 | Aman   |  30000 | TechM   |
+|  4 | Hritik |  75000 | Infosys |
+|  5 | Komal  |  20000 | Rays    |
+|  6 | Pawan  |  35000 | NCS     |
++----+--------+--------+---------+
+6 rows in set (0.00 sec)
+
+mysql> create table dept(id int primary key, deptName varchar(50));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into dept values(1 , 'HR'),(2, 'Devlepment'), (3, 'Account'),(4, 'Admin');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from dept;
++----+------------+
+| id | deptName   |
++----+------------+
+|  1 | HR         |
+|  2 | Devlepment |
+|  3 | Account    |
+|  4 | Admin      |
++----+------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table emp add deptId int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++----+--------+--------+---------+--------+
+| id | name   | salary | company | deptId |
++----+--------+--------+---------+--------+
+|  1 | Ram    |  45000 | NCS     |   NULL |
+|  2 | Syam   |  50000 | TCS     |   NULL |
+|  3 | Aman   |  30000 | TechM   |   NULL |
+|  4 | Hritik |  75000 | Infosys |   NULL |
+|  5 | Komal  |  20000 | Rays    |   NULL |
+|  6 | Pawan  |  35000 | NCS     |   NULL |
++----+--------+--------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> alter table emp add foreign key(deptId) referances dept(id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'referances dept(id)' at line 1
+mysql> alter table emp add foreign key(deptId) references dept(id);
+Query OK, 6 rows affected (0.11 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp;
++----+--------+--------+---------+--------+
+| id | name   | salary | company | deptId |
++----+--------+--------+---------+--------+
+|  1 | Ram    |  45000 | NCS     |   NULL |
+|  2 | Syam   |  50000 | TCS     |   NULL |
+|  3 | Aman   |  30000 | TechM   |   NULL |
+|  4 | Hritik |  75000 | Infosys |   NULL |
+|  5 | Komal  |  20000 | Rays    |   NULL |
+|  6 | Pawan  |  35000 | NCS     |   NULL |
++----+--------+--------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> update emp set deptId = 1 where name = 'Ram';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp;
++----+--------+--------+---------+--------+
+| id | name   | salary | company | deptId |
++----+--------+--------+---------+--------+
+|  1 | Ram    |  45000 | NCS     |      1 |
+|  2 | Syam   |  50000 | TCS     |   NULL |
+|  3 | Aman   |  30000 | TechM   |   NULL |
+|  4 | Hritik |  75000 | Infosys |   NULL |
+|  5 | Komal  |  20000 | Rays    |   NULL |
+|  6 | Pawan  |  35000 | NCS     |   NULL |
++----+--------+--------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from dept;
++----+------------+
+| id | deptName   |
++----+------------+
+|  1 | HR         |
+|  2 | Devlepment |
+|  3 | Account    |
+|  4 | Admin      |
++----+------------+
+4 rows in set (0.00 sec)
+
+mysql> update emp set deptId = 5 where name = 'Pawan';
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`advancejava`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`deptId`) REFERENCES `dept` (`id`))
+mysql> update emp set deptId = 2 where name = 'Pawan';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp set deptId = 3 where name = 'Aman';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp;
++----+--------+--------+---------+--------+
+| id | name   | salary | company | deptId |
++----+--------+--------+---------+--------+
+|  1 | Ram    |  45000 | NCS     |      1 |
+|  2 | Syam   |  50000 | TCS     |   NULL |
+|  3 | Aman   |  30000 | TechM   |      3 |
+|  4 | Hritik |  75000 | Infosys |   NULL |
+|  5 | Komal  |  20000 | Rays    |   NULL |
+|  6 | Pawan  |  35000 | NCS     |      2 |
++----+--------+--------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from dept;
++----+------------+
+| id | deptName   |
++----+------------+
+|  1 | HR         |
+|  2 | Devlepment |
+|  3 | Account    |
+|  4 | Admin      |
++----+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp left join dept on emp.deptId = dept.id;
++----+--------+--------+---------+--------+------+------------+
+| id | name   | salary | company | deptId | id   | deptName   |
++----+--------+--------+---------+--------+------+------------+
+|  1 | Ram    |  45000 | NCS     |      1 |    1 | HR         |
+|  2 | Syam   |  50000 | TCS     |   NULL | NULL | NULL       |
+|  3 | Aman   |  30000 | TechM   |      3 |    3 | Account    |
+|  4 | Hritik |  75000 | Infosys |   NULL | NULL | NULL       |
+|  5 | Komal  |  20000 | Rays    |   NULL | NULL | NULL       |
+|  6 | Pawan  |  35000 | NCS     |      2 |    2 | Devlepment |
++----+--------+--------+---------+--------+------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from emp right join dept on emp.deptId = dept.id;
++------+-------+--------+---------+--------+----+------------+
+| id   | name  | salary | company | deptId | id | deptName   |
++------+-------+--------+---------+--------+----+------------+
+|    1 | Ram   |  45000 | NCS     |      1 |  1 | HR         |
+|    6 | Pawan |  35000 | NCS     |      2 |  2 | Devlepment |
+|    3 | Aman  |  30000 | TechM   |      3 |  3 | Account    |
+| NULL | NULL  |   NULL | NULL    |   NULL |  4 | Admin      |
++------+-------+--------+---------+--------+----+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp inner join dept on emp.deptId = dept.id;
++----+-------+--------+---------+--------+----+------------+
+| id | name  | salary | company | deptId | id | deptName   |
++----+-------+--------+---------+--------+----+------------+
+|  1 | Ram   |  45000 | NCS     |      1 |  1 | HR         |
+|  6 | Pawan |  35000 | NCS     |      2 |  2 | Devlepment |
+|  3 | Aman  |  30000 | TechM   |      3 |  3 | Account    |
++----+-------+--------+---------+--------+----+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp right join dept on emp.deptId = dept.id union  select * from emp left join dept on emp.deptId = dept.id ;
++------+--------+--------+---------+--------+------+------------+
+| id   | name   | salary | company | deptId | id   | deptName   |
++------+--------+--------+---------+--------+------+------------+
+|    1 | Ram    |  45000 | NCS     |      1 |    1 | HR         |
+|    6 | Pawan  |  35000 | NCS     |      2 |    2 | Devlepment |
+|    3 | Aman   |  30000 | TechM   |      3 |    3 | Account    |
+| NULL | NULL   |   NULL | NULL    |   NULL |    4 | Admin      |
+|    2 | Syam   |  50000 | TCS     |   NULL | NULL | NULL       |
+|    4 | Hritik |  75000 | Infosys |   NULL | NULL | NULL       |
+|    5 | Komal  |  20000 | Rays    |   NULL | NULL | NULL       |
++------+--------+--------+---------+--------+------+------------+
+7 rows in set (0.01 sec)
