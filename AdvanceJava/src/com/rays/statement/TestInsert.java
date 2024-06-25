@@ -15,7 +15,7 @@ public class TestInsert {
 		Statement stmt = conn.createStatement();
 
 		int i = stmt.executeUpdate(
-				"insert into users values(2, 'Shyam', 'Yadav', 'shyam@gmail.com', 'pass123', '2001-01-22', 'Male')");
+				"insert into users values(3, 'Anish', 'Malwiya', 'anish@gmail.com', 'pass123', '2002-01-22', 'Male')");
 
 		System.out.println("Data inserted successfully... " + i);
 
