@@ -1,6 +1,9 @@
 package com.rays.preparedStatement;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class UserModelTest {
 
@@ -9,6 +12,38 @@ public class UserModelTest {
 		testAdd();
 		// testUpdate();
 		// testDelete();
+		testSearch();
+
+	}
+
+	private static void testSearch() throws Exception {
+
+		UserBean bean = new UserBean();
+
+		UserModel model = new UserModel();
+
+		List list = new ArrayList();
+
+		bean.setFirstName("Naman");
+		bean.setLastName("Malwiya");
+
+		list = model.search(bean);
+
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+
+			bean = (UserBean) it.next();
+
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getFirstName());
+			System.out.print("\t" + bean.getLastName());
+			System.out.print("\t" + bean.getLoginId());
+			System.out.print("\t" + bean.getPassword());
+			System.out.print("\t" + bean.getDob());
+			System.out.println("\t" + bean.getGender());
+
+		}
 
 	}
 
