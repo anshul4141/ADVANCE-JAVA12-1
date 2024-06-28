@@ -9,10 +9,24 @@ public class UserModelTest {
 
 	public static void main(String[] args) throws Exception {
 
-		testAdd();
+		// testAdd();
 		// testUpdate();
 		// testDelete();
-		testSearch();
+		// testSearch();
+		testFindByLogin();
+
+	}
+
+	private static void testFindByLogin() throws Exception {
+
+		UserBean bean = new UserBean();
+
+		UserModel model = new UserModel();
+
+		bean = model.findByLoginId("uday@gmail.com");
+
+		System.out.println(bean.getFirstName());
+		System.out.println(bean.getLastName());
 
 	}
 
