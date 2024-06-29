@@ -8,18 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class UserModel {
+import com.rays.util.JDBCDataSource;
 
-	ResourceBundle rb = ResourceBundle.getBundle("com.rays.bundle.system");
+public class UserModel {
 
 	public int nextPk() throws Exception {
 
 		int pk = 0;
 
-		Class.forName(rb.getString("driver"));
-
-		Connection conn = DriverManager.getConnection(rb.getString("url"), rb.getString("username"),
-				rb.getString("password"));
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("select max(id) from users");
 
@@ -37,10 +34,7 @@ public class UserModel {
 
 	public void add(UserBean bean) throws Exception {
 
-		Class.forName(rb.getString("driver"));
-
-		Connection conn = DriverManager.getConnection(rb.getString("url"), rb.getString("username"),
-				rb.getString("password"));
+		Connection conn = JDBCDataSource.getConnection();
 
 		UserBean existBean = findByLoginId(bean.getLoginId());
 
@@ -68,10 +62,7 @@ public class UserModel {
 
 	public void update(UserBean bean) throws Exception {
 
-		Class.forName(rb.getString("driver"));
-
-		Connection conn = DriverManager.getConnection(rb.getString("url"), rb.getString("username"),
-				rb.getString("password"));
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement(
 				"update users set firstName = ?, lastName = ?, loginId = ?, password = ?, dob = ?, gender = ? where id = ?");
@@ -92,10 +83,7 @@ public class UserModel {
 
 	public void delete(int i) throws Exception {
 
-		Class.forName(rb.getString("driver"));
-
-		Connection conn = DriverManager.getConnection(rb.getString("url"), rb.getString("username"),
-				rb.getString("password"));
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("delete from users where id = ?");
 
@@ -109,10 +97,7 @@ public class UserModel {
 
 	public UserBean findByLoginId(String loginId) throws Exception {
 
-		Class.forName(rb.getString("driver"));
-
-		Connection conn = DriverManager.getConnection(rb.getString("url"), rb.getString("username"),
-				rb.getString("password"));
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("select * from users where loginId = ?");
 
@@ -140,10 +125,7 @@ public class UserModel {
 
 	public List search(UserBean bean) throws Exception {
 
-		Class.forName(rb.getString("driver"));
-
-		Connection conn = DriverManager.getConnection(rb.getString("url"), rb.getString("username"),
-				rb.getString("password"));
+		Connection conn = JDBCDataSource.getConnection();
 
 		StringBuffer sql = new StringBuffer("select * from users where 1=1");
 
