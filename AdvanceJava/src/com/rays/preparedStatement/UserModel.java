@@ -34,28 +34,40 @@ public class UserModel {
 
 	public void add(UserBean bean) throws Exception {
 
-		Connection conn = JDBCDataSource.getConnection();
+		Connection conn = null;
 
-		UserBean existBean = findByLoginId(bean.getLoginId());
+		try {
 
-		if (existBean != null) {
+			conn = JDBCDataSource.getConnection();
 
-			System.out.println("LoginId already exist plead use diffrent Email");
+			UserBean existBean = findByLoginId(bean.getLoginId());
 
-		} else {
-			PreparedStatement pstmt = conn.prepareStatement("insert into users values(?, ?, ?, ?, ?, ?, ?)");
+			conn.setAutoCommit(false);
 
-			pstmt.setInt(1, nextPk());
-			pstmt.setString(2, bean.getFirstName());
-			pstmt.setString(3, bean.getLastName());
-			pstmt.setString(4, bean.getLoginId());
-			pstmt.setString(5, bean.getPassword());
-			pstmt.setDate(6, new java.sql.Date(bean.getDob().getTime()));
-			pstmt.setString(7, bean.getGender());
+			if (existBean != null) {
 
-			int i = pstmt.executeUpdate();
+				System.out.println("LoginId already exist plead use diffrent Email");
 
-			System.out.println("data inserted successfully.. " + i);
+			} else {
+				PreparedStatement pstmt = conn.prepareStatement("insert into users values(?, ?, ?, ?, ?, ?, ?)");
+
+				pstmt.setInt(1, nextPk());
+				pstmt.setString(2, bean.getFirstName());
+				pstmt.setString(3, bean.getLastName());
+				pstmt.setString(4, bean.getLoginId());
+				pstmt.setString(5, bean.getPassword());
+				pstmt.setDate(6, new java.sql.Date(bean.getDob().getTime()));
+				pstmt.setString(7, bean.getGender());
+
+				int i = pstmt.executeUpdate();
+
+				conn.commit();
+
+				System.out.println("data inserted successfully.. " + i);
+			}
+
+		} catch (Exception e) {
+			conn.rollback();
 		}
 
 	}
