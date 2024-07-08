@@ -27,7 +27,6 @@
 
 			<table>
 				<tr>
-
 					<th>FirstName</th>
 
 					<td><input type="text" name="firstName"
@@ -81,8 +80,6 @@
 
 				</tr>
 			</table>
-
-
 		</form>
 	</Center>
 

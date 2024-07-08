@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="UserRegistrationCtl">SignUp</a>
+	<a href="UserRegistrationCtl">SignUp</a> |
+	<a href="UserListCtl">UserList</a>
 	<hr>
 </body>
 </html>
