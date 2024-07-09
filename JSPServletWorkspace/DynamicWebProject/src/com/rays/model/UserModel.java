@@ -11,6 +11,20 @@ import com.rays.util.JDBCDataSource;
 
 public class UserModel {
 
+	public void delete(int id) throws Exception {
+
+		Connection conn = JDBCDataSource.getConnection();
+
+		PreparedStatement ptmt = conn.prepareStatement("delete from users where id = ?");
+
+		ptmt.setInt(1, id);
+
+		int i = ptmt.executeUpdate();
+
+		System.out.println("data deleted = " + i);
+
+	}
+
 	public List search(UserBean bean) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();

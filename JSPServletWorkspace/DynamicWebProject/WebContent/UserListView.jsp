@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<form action="">
+	<form action="UserListCtl" method="post">
 
 		<%
 			List list = (List) request.getAttribute("userlist");
@@ -20,6 +20,7 @@
 		<table border="1px">
 
 			<tr>
+				<th>click</th>
 				<th>Id</th>
 				<th>FirstName</th>
 				<th>LastName</th>
@@ -37,6 +38,7 @@
 					UserBean bean = (UserBean) it.next();
 			%>
 			<tr>
+				<td><input type="checkbox" name="ids" value="<%=bean.getId()%>"></td>
 				<td><%=bean.getId()%></td>
 				<td><%=bean.getFirstName()%></td>
 				<td><%=bean.getLastName()%></td>
@@ -47,8 +49,10 @@
 					}
 				%>
 			</tr>
-
 		</table>
+		<tr>
+			<input type="submit" name="operation" value="delete">
+		</tr>
 
 	</form>
 

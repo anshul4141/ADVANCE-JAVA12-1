@@ -40,6 +40,39 @@ public class UserListCtl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String[] ids = request.getParameterValues("ids");
+
+		UserModel model = new UserModel();
+		UserBean bean = new UserBean();
+
+		if (ids != null) {
+
+			for (String id : ids) {
+
+				System.out.println("id ==== " + id);
+
+				try {
+					model.delete(Integer.parseInt(id));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+
+		try {
+			List list = model.search(bean);
+			request.setAttribute("userlist", list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		RequestDispatcher rd = request.getRequestDispatcher("UserListView.jsp");
+		rd.forward(request, response);
+
 	}
 
 }
