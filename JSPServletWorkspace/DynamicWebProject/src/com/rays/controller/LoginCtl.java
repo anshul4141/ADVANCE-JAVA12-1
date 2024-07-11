@@ -29,10 +29,12 @@ public class LoginCtl extends HttpServlet {
 		if (op != null) {
 
 			session.invalidate();
+			request.setAttribute("msg", "user logout successfully..");
 
 		}
 
-		response.sendRedirect("LoginView.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("LoginView.jsp");
+		rd.forward(request, response);
 
 	}
 
@@ -59,6 +61,7 @@ public class LoginCtl extends HttpServlet {
 				rd.forward(request, response);
 
 			} else {
+				request.setAttribute("msg", "invalid loginId or password");
 				System.out.println("invalid loginId or Password");
 			}
 
@@ -66,6 +69,9 @@ public class LoginCtl extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		RequestDispatcher rd = request.getRequestDispatcher("LoginView.jsp");
+		rd.forward(request, response);
 
 	}
 

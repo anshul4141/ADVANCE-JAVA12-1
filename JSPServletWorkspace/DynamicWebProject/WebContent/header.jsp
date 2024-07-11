@@ -9,25 +9,31 @@
 </head>
 <body>
 
+	<br>
+
 	<%
 		UserBean user = (UserBean) session.getAttribute("user");
+	String welcomeMsg = "Hi ,";
 	%>
 
 	<%
 		if (user != null) {
 	%>
+	<%=welcomeMsg + user.getFirstName() + " " + user.getLastName() %> |
 	<a href="LoginCtl?operation=logout">logout</a> |
 	<a href="UserCtl">AddUser</a> |
 	<a href="UserListCtl">UserList</a> |
 	<%
 		} else {
 	%>
+	<%=welcomeMsg + "Guest" %> |
 	<a href="UserRegistrationCtl">SignUp</a> |
 	<a href="LoginCtl">login</a>
 	<%
 		}
 	%>
-
+	<br>
+	<br>
 
 	<hr>
 </body>

@@ -11,50 +11,54 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<form action="UserListCtl" method="post">
-
-		<%
-			List list = (List) request.getAttribute("userlist");
-		%>
-
-		<table border="1px">
-
-			<tr>
-				<th>click</th>
-				<th>Id</th>
-				<th>FirstName</th>
-				<th>LastName</th>
-				<th>LoginId</th>
-				<th>DOB</th>
-				<th>gender</th>
-			</tr>
+	<center>
+		<form action="UserListCtl" method="post">
 
 			<%
-				Iterator it = list.iterator();
+				List list = (List) request.getAttribute("userlist");
 			%>
 
-			<%
-				while (it.hasNext()) {
-					UserBean bean = (UserBean) it.next();
-			%>
-			<tr>
-				<td><input type="checkbox" name="ids" value="<%=bean.getId()%>"></td>
-				<td><%=bean.getId()%></td>
-				<td><%=bean.getFirstName()%></td>
-				<td><%=bean.getLastName()%></td>
-				<td><%=bean.getLoginId()%></td>
-				<td><%=bean.getDob()%></td>
-				<td><%=bean.getGender()%></td>
+			<h2>User List</h2>
+
+			<table border="1" width="100%" border="1px">
+
+				<tr style="background: skyblue">
+					<th>click</th>
+					<th>Id</th>
+					<th>FirstName</th>
+					<th>LastName</th>
+					<th>LoginId</th>
+					<th>DOB</th>
+					<th>gender</th>
+				</tr>
+
 				<%
-					}
+					Iterator it = list.iterator();
 				%>
+
+				<%
+					while (it.hasNext()) {
+						UserBean bean = (UserBean) it.next();
+				%>
+				<tr align="center">
+					<td><input type="checkbox" name="ids"
+						value="<%=bean.getId()%>"></td>
+					<td><%=bean.getId()%></td>
+					<td><%=bean.getFirstName()%></td>
+					<td><%=bean.getLastName()%></td>
+					<td><%=bean.getLoginId()%></td>
+					<td><%=bean.getDob()%></td>
+					<td><%=bean.getGender()%></td>
+					<%
+						}
+					%>
+				</tr>
+			</table>
+			<tr>
+				<input type="submit" name="operation" value="delete">
 			</tr>
-		</table>
-		<tr>
-			<input type="submit" name="operation" value="delete">
-		</tr>
 
-	</form>
-
+		</form>
+	</center>
 </body>
 </html>
