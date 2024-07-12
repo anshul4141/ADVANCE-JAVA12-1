@@ -11,7 +11,7 @@
 	<%@ include file="header.jsp"%>
 	<Center>
 
-		<form action="UserCtl" method="post">
+		<form action="UserCtl.do" method="post">
 			<h1>Add User</h1>
 
 			<%

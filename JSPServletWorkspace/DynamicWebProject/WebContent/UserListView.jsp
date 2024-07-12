@@ -12,7 +12,7 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<center>
-		<form action="UserListCtl" method="post">
+		<form action="UserListCtl.do" method="post">
 
 			<%
 				List list = (List) request.getAttribute("userlist");

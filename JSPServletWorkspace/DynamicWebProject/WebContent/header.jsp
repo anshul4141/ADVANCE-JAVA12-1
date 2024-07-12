@@ -13,20 +13,22 @@
 
 	<%
 		UserBean user = (UserBean) session.getAttribute("user");
-	String welcomeMsg = "Hi ,";
+		String welcomeMsg = "Hi ,";
 	%>
 
 	<%
 		if (user != null) {
 	%>
-	<%=welcomeMsg + user.getFirstName() + " " + user.getLastName() %> |
+	<%=welcomeMsg + user.getFirstName() + " " + user.getLastName()%>
+	|
 	<a href="LoginCtl?operation=logout">logout</a> |
-	<a href="UserCtl">AddUser</a> |
-	<a href="UserListCtl">UserList</a> |
+	<a href="UserCtl.do">AddUser</a> |
+	<a href="UserListCtl.do">UserList</a> |
 	<%
 		} else {
 	%>
-	<%=welcomeMsg + "Guest" %> |
+	<%=welcomeMsg + "Guest"%>
+	|
 	<a href="UserRegistrationCtl">SignUp</a> |
 	<a href="LoginCtl">login</a>
 	<%
