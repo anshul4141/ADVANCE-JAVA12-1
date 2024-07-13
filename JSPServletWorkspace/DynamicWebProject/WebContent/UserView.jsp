@@ -12,6 +12,9 @@
 	<Center>
 
 		<form action="UserCtl.do" method="post">
+			<%
+				UserBean bean = (UserBean) request.getAttribute("bean");
+			%>
 			<h1>Add User</h1>
 
 			<%
@@ -28,9 +31,14 @@
 
 			<table>
 				<tr>
+					<td><input type="hidden" name="id"
+						value="<%=(bean != null) ? bean.getId() : ""%>"></td>
+				</tr>
+				<tr>
 					<th>FirstName</th>
 
 					<td><input type="text" name="firstName"
+						value="<%=(bean != null) ? bean.getFirstName() : ""%>"
 						Placeholder="Enter First Name"></td>
 
 				</tr>
@@ -39,6 +47,7 @@
 					<th>LastName</th>
 
 					<td><input type="text" name="lastName"
+						value="<%=(bean != null) ? bean.getLastName() : ""%>"
 						Placeholder="Enter Last Name"></td>
 
 				</tr>
@@ -47,6 +56,7 @@
 					<th>loginId</th>
 
 					<td><input type="email" name="loginId"
+						value="<%=(bean != null) ? bean.getLoginId() : ""%>"
 						Placeholder="Enter loginId"></td>
 
 				</tr>
@@ -55,6 +65,7 @@
 					<th>Password</th>
 
 					<td><input type="password" name="password"
+						value="<%=(bean != null) ? bean.getPassword() : ""%>"
 						Placeholder="Enter Password"></td>
 
 				</tr>
@@ -62,7 +73,9 @@
 
 					<th>DOB</th>
 
-					<td><input type="date" name="dob" Placeholder="Enter DOB"></td>
+					<td><input type="date" name="dob"
+						value="<%=(bean != null) ? bean.getDob() : ""%>"
+						Placeholder="Enter DOB"></td>
 
 				</tr>
 				<tr>
@@ -70,14 +83,30 @@
 					<th>Gender</th>
 
 					<td><input type="text" name="gender"
+						value="<%=(bean != null) ? bean.getGender() : ""%>"
 						Placeholder="Enter Gender"></td>
 
 				</tr>
 				<tr>
+					<%
+						if (bean != null) {
+					%>
+					<th>Click</th>
+
+					<td><input type="submit" name="operation" value="update"></td>
+					<%
+						} else {
+					%>
 
 					<th>Click</th>
 
 					<td><input type="submit" name="operation" value="save"></td>
+
+					<%
+						}
+					%>
+
+
 
 				</tr>
 			</table>

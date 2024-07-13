@@ -11,6 +11,36 @@ import com.rays.util.JDBCDataSource;
 
 public class UserModel {
 
+	public UserBean findByPk(int id) throws Exception {
+
+		Connection conn = JDBCDataSource.getConnection();
+
+		PreparedStatement ptmt = conn.prepareStatement("select * from users where id = ?");
+
+		ptmt.setInt(1, id);
+
+		ResultSet rs = ptmt.executeQuery();
+
+		UserBean bean = null;
+
+		while (rs.next()) {
+
+			bean = new UserBean();
+
+			bean = new UserBean();
+			bean.setId(rs.getInt(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLoginId(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			bean.setGender(rs.getString(7));
+
+		}
+		return bean;
+
+	}
+
 	public void delete(int id) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();

@@ -1,6 +1,7 @@
 package com.rays.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -20,8 +21,24 @@ public class UserCtl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("in get method");
-		response.sendRedirect("UserView.jsp");
+		String id = request.getParameter("id");
+		System.out.println("id ===== > " + id);
+
+		UserModel model = new UserModel();
+		UserBean bean = new UserBean();
+
+		if (id != null) {
+			try {
+				bean = model.findByPk(Integer.parseInt(id));
+				request.setAttribute("bean", bean);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp");
+		rd.forward(request, response);
 
 	}
 
@@ -30,6 +47,10 @@ public class UserCtl extends HttpServlet {
 			throws ServletException, IOException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		String op = request.getParameter("operation");
+		
+		System.out.println("op ====== > " + op);
 
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -42,20 +63,35 @@ public class UserCtl extends HttpServlet {
 		UserModel model = new UserModel();
 
 		try {
-
 			bean.setFirstName(firstName);
 			bean.setLastName(lastName);
 			bean.setLoginId(loginId);
 			bean.setPassword(password);
 			bean.setDob(sdf.parse(dob));
 			bean.setGender(gender);
-			model.add(bean);
-			request.setAttribute("msg", "User Added successfull");
+
+			if (op.equals("save")) {
+
+				model.add(bean);
+				request.setAttribute("msg", "data added successfully");
+
+			} else {
+
+				String id = request.getParameter("id");
+
+				if (id != null) {
+					bean.setId(Integer.parseInt(id));
+					model.update(bean);
+					request.setAttribute("msg", "data updated successfully");
+				}
+
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			request.setAttribute("msg", "User Added Failed");
 			e.printStackTrace();
 		}
+		bean.setGender(gender);
 
 		RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp");
 		rd.forward(request, response);
