@@ -24,6 +24,8 @@
 	<a href="LoginCtl?operation=logout">logout</a> |
 	<a href="UserCtl.do">AddUser</a> |
 	<a href="UserListCtl.do">UserList</a> |
+	<a href="MarksheetCtl.do">Add Marksheet</a> |
+	<a href="MarksheetListCtl.do">MarksheetList</a>
 	<%
 		} else {
 	%>
