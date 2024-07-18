@@ -32,7 +32,8 @@
 	<%=welcomeMsg + "Guest"%>
 	|
 	<a href="UserRegistrationCtl">SignUp</a> |
-	<a href="LoginCtl">login</a>
+	<a href="LoginCtl">login</a> |
+	<a href="ForgotePasswordCtl">forgotPassword</a>
 	<%
 		}
 	%>
