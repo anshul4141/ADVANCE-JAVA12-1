@@ -56,22 +56,20 @@ public class LoginCtl extends HttpServlet {
 			if (bean != null) {
 
 				session.setAttribute("user", bean);
-
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 				rd.forward(request, response);
 
 			} else {
 				request.setAttribute("msg", "invalid loginId or password");
 				System.out.println("invalid loginId or Password");
+				RequestDispatcher rd = request.getRequestDispatcher("LoginView.jsp");
+				rd.forward(request, response);
 			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("LoginView.jsp");
-		rd.forward(request, response);
 
 	}
 

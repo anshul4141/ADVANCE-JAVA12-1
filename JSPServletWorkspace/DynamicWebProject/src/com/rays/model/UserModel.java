@@ -87,7 +87,7 @@ public class UserModel {
 			bean.setGender(rs.getString(7));
 			list.add(bean);
 		}
-		return null;
+		return list;
 
 	}
 
