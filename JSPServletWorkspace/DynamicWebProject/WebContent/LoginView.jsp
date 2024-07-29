@@ -16,14 +16,17 @@
 			<%
 				if (msg != null) {
 			%>
-			<%=msg%>
+			<div class="alert alert-danger">
+				<%=msg%>
+			</div>
 			<%
 				}
 			%>
 			<table>
 				<tr>
 					<th>loginId</th>
-					<td><input type="email" name="loginId" placeholder="Enter loginId"></td>
+					<td><input type="email" name="loginId"
+						placeholder="Enter loginId"></td>
 				</tr>
 				<tr>
 					<th>password</th>
@@ -32,10 +35,13 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="submit" name="operation" value="signIn"></td>
+					<td><input type="submit" name="operation"
+						class="btn btn-primary" value="signIn"></td>
 				</tr>
 			</table>
 		</form>
 	</center>
+	<%@ include file="footer.jsp"%>
+
 </body>
 </html>
