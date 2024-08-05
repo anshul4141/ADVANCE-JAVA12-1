@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Input Validation</title>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form onsubmit="return save()">
+        <table>
+            <tr>
+                <th>First Name:</th>
+                <td><input type="text" id="firstName" name="firstName"></td>
+                <td><span id="errorFirstName" style="color:red;"></span></td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td><input type="text" id="lastName" name="lastName"></td>
+                <td><span id="errorLastName" style="color:red;"></span></td>
+            </tr>
+            <tr>
+                <th>Login ID:</th>
+                <td><input type="text" id="loginId" name="loginId"></td>
+                <td><span id="errorLoginId" style="color:red;"></span></td>
+            </tr>
+            <tr>
+                <th>Password:</th>
+                <td><input type="password" id="password" name="password"></td>
+                <td><span id="errorPassword" style="color:red;"></span></td>
+            </tr>
+            <tr>
+                <td colspan="3"><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function save() {
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var loginId = document.getElementById("loginId").value;
+            var password = document.getElementById("password").value;
+
+            var errorFirstName = document.getElementById("errorFirstName");
+            var errorLastName = document.getElementById("errorLastName");
+            var errorLoginId = document.getElementById("errorLoginId");
+            var errorPassword = document.getElementById("errorPassword");
+
+            // Clear previous error messages
+            errorFirstName.textContent = "";
+            errorLastName.textContent = "";
+            errorLoginId.textContent = "";
+            errorPassword.textContent = "";
+
+            var isValid = true;
+
+            if (firstName === "") {
+                errorFirstName.textContent = "First Name is required.";
+                isValid = false;
+            }
+            if (lastName === "") {
+                errorLastName.textContent = "Last Name is required.";
+                isValid = false;
+            }
+            if (loginId === "") {
+                errorLoginId.textContent = "Login ID is required.";
+                isValid = false;
+            } 
+            if (password === "") {
+                errorPassword.textContent = "Password is required.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
